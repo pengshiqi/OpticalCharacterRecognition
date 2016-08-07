@@ -55,8 +55,19 @@ var ocrDemo = {
 
   onMouseMove: function(e, ctx, canvas) {
     if (!canvas.isDrawing) {
-      
+      return;
     }
+    this.fillSquare(ctx, e.clientX - canvas.offSetLeft, e.clientY - canvas.offSetTop)
   },
+
+  onMouseUp: function(e) {
+    canvas.isDrawing = false;
+  },
+
+
+  onMouseDown: function(e, ctx, canvas) {
+    canvas.isDrawing = true;
+    this.fillSquare(ctx, e.clientX - canvas.offSetLeft, e.clientY - canvas.offSetTop)
+  }
 
 }
