@@ -16,6 +16,12 @@
 
 用户接口(ocr.html)是一个html页面，用户在canvas上写数字，之后点击选择训练或是预测。客户端(ocr.js)将收集到的手写数字组合成一个数组发送给服务器端(server.py)处理，服务器调用神经网络模块(ocr.py)，它会在初始化时通过已有的数据集训练一个神经网络，神经网络的信息会被保存在文件中，等之后再一次启动时使用。最后，神经网络设计脚本(neural_network_design.py)是用来测试不同隐藏节点数下的性能，决定隐藏节点数用的。
 
+下载数据集
+```
+wget http://labfile.oss.aliyuncs.com/courses/593/data.csv
+wget http://labfile.oss.aliyuncs.com/courses/593/dataLabels.csv
+```
+
 ## Reference
 
 * [实验楼](https://www.shiyanlou.com/courses/593/labs/1966/document)

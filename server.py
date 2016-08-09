@@ -8,8 +8,8 @@ import random
 from ocr import OCRNeuralNetwork
 
 # server config
-HOST_NAME = 'localhost'
-PORT_NUMBER = 9000
+HOST_NAME = '127.0.0.1'
+PORT_NUMBER = 7000
 
 HIDDEN_NODE_COUNT = 15
 
@@ -66,7 +66,9 @@ if __name__ == '__main__':
 
     try:
         # 启动服务器
+        print 'ready to serve'
         httpd.serve_forever()
+        print 'serve successfully'
     except KeyboardInterrupt:
         pass
     else:
