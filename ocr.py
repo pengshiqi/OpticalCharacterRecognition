@@ -54,7 +54,8 @@ class OCRNeuralNetwork:
     def train(self, training_data_array):
         for data in training_data_array:
             # 前向传播得到结果向量
-            y1 = np.dot(np.mat(self.theta1), np.mat(data.y0).T)
+            # print(data.y0)
+            y1 = np.dot(np.mat(self.theta1), np.mat(data['y0']).T)
             sum1 = y1 + np.mat(self.input_layer_bias)
             y1 = self.sigmoid(sum1)
 
@@ -64,12 +65,12 @@ class OCRNeuralNetwork:
 
             # 后向传播得到误差向量
             actual_vals = [0] * 10
-            actual_vals[data.label] = 1
+            actual_vals[data['label']] = 1
             output_errors = np.mat(actual_vals).T - np.mat(y2)
             hidden_errors = np.multiply(np.dot(np.mat(self.theta2).T, output_errors), self.sigmoid_prime(sum1))
 
             # 更新权重矩阵与偏置向量
-            self.theta1 += self.LEARNING_RATE * np.dot(np.mat(hidden_errors), np.mat(data.y0))
+            self.theta1 += self.LEARNING_RATE * np.dot(np.mat(hidden_errors), np.mat(data['y0']))
             self.theta2 += self.LEARNING_RATE * np.dot(np.mat(output_errors), np.mat(y1).T)
             self.hidden_layer_bias += self.LEARNING_RATE * output_errors
             self.input_layer_bias += self.LEARNING_RATE * hidden_errors

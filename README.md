@@ -2,7 +2,7 @@
 
 本项目基于BP神经网络实现一个手写字符识别系统，系统会在服务器启动时自动读入训练好的神经网络文件，如果文件不存在，则会读入数据集开始训练，用户可以通过在html页面上手写数字发送给服务器来得到识别结果。
 
-### 系统组成
+### System composition
 
 * 客户端(*ocr.js*)
 
@@ -21,6 +21,20 @@
 wget http://labfile.oss.aliyuncs.com/courses/593/data.csv
 wget http://labfile.oss.aliyuncs.com/courses/593/dataLabels.csv
 ```
+
+### Operation method
+
+First open the server:
+```
+python -m SimpleHTTPServer 3000
+```
+
+Then run the python server file in another terminal window:
+```
+python server.py
+```
+
+Finally, you can visit the website at http://localhost:3000.
 
 ## Reference
 

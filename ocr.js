@@ -90,7 +90,7 @@ var ocrDemo = {
     this.trainingRequestCount += 1;
     // 将客户端训练数据集发送给服务器端
     if (this.trainingRequestCount == this.BATCH_SIZE) {
-      alert('Sending training data to server...');
+      // alert('Sending training data to server...');
       var json = {
         trainArray: this.trainArray,
         train: true
@@ -112,7 +112,7 @@ var ocrDemo = {
       image: this.data,
       predict: true
     }
-    this.sendData(json);
+      this.sendData(json);
   },
 
   // 处理服务器响应
@@ -123,7 +123,8 @@ var ocrDemo = {
     }
     var responseJSON = JSON.parse(xmlHttp.responseText);
     if (xmlHttp.responseText && responseJSON.type == 'test') {
-      alert('The neural network predicts you wrote a \'' + responseJSON.result + '\'');
+      // alert('The neural network predicts you wrote a \'' + responseJSON.result + '\'');
+      document.getElementById('digit').value = responseJSON.result;
     }
   },
 
@@ -133,12 +134,15 @@ var ocrDemo = {
 
   sendData: function(json) {
     var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open('POST', this.HOST + ':' + this.port, false);
+    xmlHttp.open('POST', this.HOST + ':' + this.PORT, true);
     xmlHttp.onload = function() { this.receiveResponse(xmlHttp); }.bind(this);
     xmlHttp.onerror = function() { this.onError(xmlHttp); }.bind(this);
     var msg = JSON.stringify(json);
-    xmlHttp.setRequestHeader('Content-length', msg.length);
-    xmlHttp.setRequestHeader('Connection', 'close');
+    // console.log(msg);
+    // xmlHttp.setRequestHeader('Content-length', msg.length);
+    // xmlHttp.setRequestHeader('Connection', 'close');
+    // xmlHttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    // console.log(JSON.parse(msg));
     xmlHttp.send(msg);
   }
 }

@@ -9,7 +9,7 @@ from ocr import OCRNeuralNetwork
 
 # server config
 HOST_NAME = '127.0.0.1'
-PORT_NUMBER = 7000
+PORT_NUMBER = 9000
 
 HIDDEN_NODE_COUNT = 15
 
@@ -37,10 +37,13 @@ class JSONHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         content = self.rfile.read(var_len)
         payload = json.loads(content)
 
+
         # 如果是训练请求，训练然后保存训练完的神经网络
         if payload.get('train'):
+            print(payload)
             nn.train(payload['trainArray'])
             nn.save()
+            response = {'type': 'train'}
         # 如果是预测请求，返回预测值
         elif payload.get('predict'):
             try:
@@ -52,7 +55,7 @@ class JSONHandler(BaseHTTPServer.BaseHTTPRequestHandler):
             response_code = 400
 
         self.send_response(response_code)
-        self.send_header('Contene-type', 'application/json')
+        self.send_header('Content-type', 'application/json')
         self.send_header('Access-Control-Allow-Origin', '*')
         self.end_headers()
         if response:
